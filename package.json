@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "electrojet-scripts CLI",
   "bin": {
-    "electron-scripts": "bin/electrojet-scripts"
+    "electrojet-scripts": "bin/electrojet-scripts"
   },
   "scripts": {
     "format": "prettier --write **/*.{js,json} && standard --fix",
