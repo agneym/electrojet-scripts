@@ -1,7 +1,7 @@
 {
   "name": "electrojet-scripts",
   "version": "0.0.3",
-  "description": "electrojet-scripts CLI",
+  "description": "Build scripts for use with create-electrojet",
   "bin": {
     "electrojet-scripts": "bin/electrojet-scripts"
   },
@@ -14,8 +14,6 @@
     "coverage": "jest --coverage"
   },
   "files": [
-    "LICENSE",
-    "README.md",
     "bin",
     "src"
   ],
@@ -57,5 +55,12 @@
   "prettier": {
     "semi": false,
     "singleQuote": true
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BoyWithSilverWings/electrojet-scripts"
+  },
+  "bugs": {
+    "url": "https://github.com/BoyWithSilverWings/electrojet-scripts/issues"
   }
 }
