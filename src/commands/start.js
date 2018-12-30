@@ -11,7 +11,7 @@ module.exports = {
     } = toolbox;
 
     const ownConfig = require("../webpack.config.js");
-    const userConfig = require("electrojet.config.js");
+    const userConfig = require(process.cwd()+"/electrojet.config.js");
     const env = "development";
 
     const config = userConfig.plugins.reduce((acc, configFn) => {
