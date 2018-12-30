@@ -1,5 +1,6 @@
 const webpack = require("webpack");
 const webpackDevServer = require("webpack-dev-server");
+const webpackMerge = require("webpack-merge");
 
 module.exports = {
   name: 'start',
@@ -9,7 +10,14 @@ module.exports = {
       system: { spawn }, 
     } = toolbox;
 
-    const config = require("../webpack.config.js");
+    const ownConfig = require("../webpack.config.js");
+    const userConfig = require("electrojet.config.js");
+    const env = "development";
+
+    const config = userConfig.plugins.reduce((acc, configFn) => {
+      return webpackMerge(acc, configFn(env));
+    }, ownConfig);
+
     const compiler = webpack(config);
 
     const server = new webpackDevServer(compiler, {
