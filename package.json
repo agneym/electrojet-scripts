@@ -1,10 +1,9 @@
 {
-  "name": "electron-scripts",
+  "name": "electrojet-scripts",
   "version": "0.0.1",
-  "description": "electron-scripts CLI",
-  "private": true,
+  "description": "electrojet-scripts CLI",
   "bin": {
-    "electron-scripts": "bin/electron-scripts"
+    "electron-scripts": "bin/electrojet-scripts"
   },
   "scripts": {
     "format": "prettier --write **/*.{js,json} && standard --fix",
@@ -17,7 +16,6 @@
   "files": [
     "LICENSE",
     "README.md",
-    "docs",
     "bin",
     "src"
   ],
