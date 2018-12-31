@@ -1,23 +1,37 @@
-const { build } = require('gluegun')
+#!/usr/bin/env node
+const meow = require("meow");
 
-/**
- * Create the cli and kick it off
- */
-async function run (argv) {
-  // create a CLI runtime
-  const cli = build()
-    .brand('electron-scripts')
-    .src(__dirname)
-    .plugins('./node_modules', { matching: 'electron-scripts-*', hidden: true })
-    .help() // provides default for help, h, --help, -h
-    .version() // provides default for version, v, --version, -v
-    .create()
+const start = require("../src/commands/start");
+const build = require("../src/commands/build");
 
-  // and run it
-  const toolbox = await cli.run(argv)
+function run (argv) {
+  const cli = meow(`
+    Usage
+      $ electron-scripts <input>
+ 
+    Examples
+      Start the script in development mode.
+      $ electron-scripts start
 
-  // send it back (for testing, mostly)
-  return toolbox
+      Build the app into build targets
+      $ electron-scripts build
+  `, {
+    flags: {
+    }
+  });
+
+  const command = cli.input[0];
+
+  if(validateCommand(cli, command)) {
+    switch(command) {
+      case 'start':
+        start();
+        break;
+      case 'build':
+        build();
+        break;
+    }
+  }
 }
 
 module.exports = { run }
