@@ -2,7 +2,8 @@ const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
-module.exports = {
+module.exports = ({ env }) => ({
+  mode: env,
   entry: path.join(process.cwd(), 'src/index.js'),
   output: {
     filename: 'bundle.js',
@@ -49,4 +50,4 @@ module.exports = {
       chunkFilename: '[id].css'
     })
   ]
-}
+});

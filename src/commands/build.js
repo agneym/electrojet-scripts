@@ -1,5 +1,5 @@
 const webpack = require("webpack");
-const spawn = require("spawn");
+const spawn = require("cross-spawn");
 
 async function build() {
   const config = require("../webpack.config.js");
