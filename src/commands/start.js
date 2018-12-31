@@ -1,19 +1,14 @@
 const webpack = require("webpack");
 const webpackDevServer = require("webpack-dev-server");
-const webpackMerge = require("webpack-merge");
 const spawn = require("cross-spawn");
+
+const getWebpackConfig = require("../extensions/getWebpackConfig");
 
 async function start() {
   const env = "DEV";
-  const ownConfig = require("../webpack.config.js")({
-    env,
-  });
-  const userConfig = require(process.cwd()+"/electrojet.config.js");
-
-  const config = userConfig.plugins.reduce((acc, configFn) => {
-    return webpackMerge(acc, configFn(env));
-  }, ownConfig);
-
+  
+  const config = getWebpackConfig(env);
+  
   const compiler = webpack(config);
 
   const server = new webpackDevServer(compiler, {

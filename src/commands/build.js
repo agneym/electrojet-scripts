@@ -1,8 +1,12 @@
 const webpack = require("webpack");
 const spawn = require("cross-spawn");
 
+const getWebpackConfig = require("../extensions/getWebpackConfig");
+
 async function build() {
-  const config = require("../webpack.config.js");
+  const env = "PROD";
+  
+  const config = getWebpackConfig(env);
   const compiler = webpack(config);
 
   compiler.run((err, stats) => {
@@ -32,3 +36,5 @@ async function build() {
     });
   });
 }
+
+module.exports = build;
