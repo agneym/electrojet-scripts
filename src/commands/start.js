@@ -4,7 +4,7 @@ const webpackMerge = require("webpack-merge");
 const spawn = require("cross-spawn");
 
 async function start() {
-  const env = "development";
+  const env = "DEV";
   const ownConfig = require("../webpack.config.js")({
     env,
   });
@@ -20,7 +20,8 @@ async function start() {
     contentBase: process.cwd(),
     hot: true,
     historyApiFallback: true,
-    publicPath: '/'
+    publicPath: '/',
+    clientLogLevel: 'none',
   });
 
   server.listen(4567, "localhost", (err) => {
