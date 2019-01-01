@@ -1,5 +1,10 @@
 const cosmiconfig = require('cosmiconfig')
 
+const defaultConfig = {
+  dir: process.cwd(),
+  all: true,
+}
+
 /**
  * Returns configuration for electron packager merging user and default options
  * @returns {Object}
@@ -9,9 +14,9 @@ async function getPackagerConfig() {
   const result = await explorer.search()
   
   if(result.isEmpty) {
-    return {}
+    return defaultConfig
   } else {
-    return result.config
+    return Object.assign({}, defaultConfig, result.config)
   }
 }
 

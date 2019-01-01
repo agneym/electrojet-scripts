@@ -53,7 +53,8 @@ module.exports = {
       }
     }),
     new WebpackBar({
-      profile: true
+      profile: true,
+      name: "Electrojet",
     })
   ]
 }

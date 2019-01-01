@@ -1,5 +1,6 @@
 const webpack = require('webpack')
 const packager = require('electron-packager')
+const ora = require("ora")
 
 const getWebpackConfig = require('../extensions/getWebpackConfig')
 const getPackagerConfig = require('../extensions/getPackagerConfig')
@@ -35,8 +36,19 @@ async function build (cli) {
       console.warn(info.warnings)
     }
 
-    const config = getPackagerConfig()
-    await packager(config)
+    const spinner = ora("Starting to generate build").start()
+
+    try {
+      const config = getPackagerConfig()
+      const appPaths = await packager(config)
+      spinner.succeed(`Generated builds successfully at
+        ${appPaths.join('\n')}
+      `);
+    } catch(error) {
+      spinner.fail(`Could not generate build :(
+        ${error}  
+      `)
+    }
   })
 }
 
