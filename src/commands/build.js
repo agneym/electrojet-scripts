@@ -1,5 +1,6 @@
 const webpack = require('webpack')
 const spawn = require('cross-spawn')
+const packager = require('electron-packager')
 
 const getWebpackConfig = require('../extensions/getWebpackConfig')
 
@@ -34,10 +35,9 @@ async function build (cli) {
       console.warn(info.warnings)
     }
 
-    spawn(`npm run build`, {
-      shell: true,
-      stdio: 'inherit',
-      stderr: 'inherit'
+    await packager({
+      dir: process.cwd(),
+      all: true,
     })
   })
 }
