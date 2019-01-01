@@ -28,7 +28,7 @@ async function start() {
       return;
     }
 
-    spawn(`npm run electron`, {
+    spawn(`npx electron .`, {
       shell: true,
       stdio: 'inherit',
       stderr: 'inherit'
