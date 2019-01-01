@@ -45,7 +45,7 @@ module.exports = {
    * @param {Object} result.config.buildOptions - Options for electron packager
    * @returns {Object}
    */
-  getPackagerConfig = function(result) {
+  getPackagerConfig: function(result) {
     const defaultConfig = {
       dir: process.cwd(),
       all: true,
