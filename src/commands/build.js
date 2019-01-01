@@ -11,7 +11,7 @@ const getPackagerConfig = require('../extensions/getPackagerConfig')
  * @param {Object} cli
  */
 async function build (cli) {
-  const env = 'PROD'
+  const env = 'prod'
 
   const config = getWebpackConfig(env)
   const compiler = webpack(config)

@@ -10,7 +10,7 @@ const getWebpackConfig = require('../extensions/getWebpackConfig')
  * @param {object} cli
  */
 async function start () {
-  const env = 'DEV'
+  const env = 'dev'
 
   const config = getWebpackConfig(env)
 
