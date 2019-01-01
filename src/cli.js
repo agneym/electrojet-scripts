@@ -10,16 +10,25 @@ function run(argv) {
     `
     Usage
       $ electron-scripts <input>
+    
+    Options
+      --port, -p Port
  
     Examples
       Start the script in development mode.
-      $ electron-scripts start
+      $ electron-scripts start --port=4567
 
       Build the app into build targets
       $ electron-scripts build
   `,
     {
-      flags: {},
+      flags: {
+        port: {
+          type: 'number',
+          alias: 'p',
+          default: 4567,
+        }
+      }
     }
   );
 

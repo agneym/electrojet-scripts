@@ -9,8 +9,9 @@ const {getConfig, getWebpackConfig} = require('../extensions/getConfig')
  * Runs webpack dev server and sets electron on watch
  * @param {object} cli
  */
-async function start () {
+async function start (cli) {
   const env = 'dev'
+  const userPort = cli.flags.port
 
   const config = await getConfig()
 
@@ -25,7 +26,7 @@ async function start () {
     clientLogLevel: 'none'
   })
 
-  server.listen(4567, 'localhost', (err) => {
+  server.listen(userPort, 'localhost', (err) => {
     if (err) {
       console.error(err.stack || err)
       if (err.details) {
@@ -34,7 +35,7 @@ async function start () {
       return
     }
 
-    spawn(`npx electron .`, {
+    spawn(`npx electron . --port=${userPort}`, {
       shell: true,
       stdio: 'inherit',
       stderr: 'inherit'
