@@ -1,8 +1,8 @@
 const webpack = require('webpack')
-const spawn = require('cross-spawn')
 const packager = require('electron-packager')
 
 const getWebpackConfig = require('../extensions/getWebpackConfig')
+const getPackagerConfig = require('../extensions/getPackagerConfig')
 
 /**
  * Triggered when start command is run from the CLI
@@ -35,10 +35,8 @@ async function build (cli) {
       console.warn(info.warnings)
     }
 
-    await packager({
-      dir: process.cwd(),
-      all: true,
-    })
+    const config = getPackagerConfig()
+    await packager(config)
   })
 }
 
