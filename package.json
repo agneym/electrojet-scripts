@@ -6,7 +6,7 @@
     "electrojet-scripts": "bin/electrojet-scripts"
   },
   "scripts": {
-    "format": "prettier --write **/*.{js,json} && standard --fix",
+    "format": "standard --fix && prettier --write **/*.{js,json}",
     "lint": "standard",
     "test": "jest",
     "watch": "jest --watch",
@@ -59,8 +59,20 @@
     ]
   },
   "prettier": {
-    "semi": false,
+    "trailingComma": "es5",
     "singleQuote": true
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,json,css,md}": [
+      "standard --fix",
+      "prettier --write",
+      "git add"
+    ]
   },
   "repository": {
     "type": "git",

@@ -1,11 +1,11 @@
-const WebpackBar = require('webpackbar');
+const WebpackBar = require('webpackbar')
 
 module.exports = {
-  mode: "development",
+  mode: 'development',
   devServer: {
     publicPath: '/',
     historyApiFallback: true,
-    clientLogLevel: 'none',
+    clientLogLevel: 'none'
   },
   module: {
     rules: [
@@ -13,17 +13,17 @@ module.exports = {
         test: /\.css$/,
         use: [
           {
-            loader: "style-loader"
+            loader: 'style-loader'
           },
           {
-            loader: "css-loader",
-          },
+            loader: 'css-loader'
+          }
         ]
       },
       {
         test: /.jsx?$/,
         use: {
-          loader: "babel-loader"
+          loader: 'babel-loader'
         },
         exclude: /(node_modules|dist|build-utils|webpack.config.js)/
       }

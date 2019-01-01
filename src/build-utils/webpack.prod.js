@@ -1,24 +1,25 @@
-const webpack = require("webpack");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const webpack = require('webpack')
+const WebpackBar = require('webpackbar')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
-  mode: "production",
+  mode: 'production',
   module: {
     rules: [
       {
         test: /\.css$/,
         use: [
           MiniCssExtractPlugin.loader,
-          "css-loader",
-          "postcss-loader"
-        ],
+          'css-loader',
+          'postcss-loader'
+        ]
       },
       {
         test: /\.jsx?$/,
         use: {
-          loader: "babel-loader"
+          loader: 'babel-loader'
         },
         exclude: /(node_modules|dist|build-utils|webpack.config.js)/
       }
@@ -29,18 +30,18 @@ module.exports = {
       new UglifyJsPlugin({
         cache: true,
         parallel: true,
-        sourceMap: true,
+        sourceMap: true
       }),
       new OptimizeCSSAssetsPlugin({})
     ]
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: "[name].css",
-      chunkFilename: "[id].css"
+      filename: '[name].css',
+      chunkFilename: '[id].css'
     }),
     new webpack.EnvironmentPlugin({
-      NODE_ENV: "production",
+      NODE_ENV: 'production',
       DEBUG: false
     }),
     new UglifyJsPlugin({
@@ -52,7 +53,7 @@ module.exports = {
       }
     }),
     new WebpackBar({
-      profile: true,
+      profile: true
     })
-  ],
+  ]
 }

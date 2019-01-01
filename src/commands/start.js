@@ -1,39 +1,44 @@
-const webpack = require("webpack");
-const webpackDevServer = require("webpack-dev-server");
-const spawn = require("cross-spawn");
+const webpack = require('webpack')
+const WebpackDevServer = require('webpack-dev-server')
+const spawn = require('cross-spawn')
 
-const getWebpackConfig = require("../extensions/getWebpackConfig");
+const getWebpackConfig = require('../extensions/getWebpackConfig')
 
-async function start() {
-  const env = "DEV";
-  
-  const config = getWebpackConfig(env);
-  
-  const compiler = webpack(config);
+/**
+ * Triggered when start command is run from the CLI
+ * Runs webpack dev server and sets electron on watch
+ * @param {object} cli
+ */
+async function start () {
+  const env = 'DEV'
 
-  const server = new webpackDevServer(compiler, {
+  const config = getWebpackConfig(env)
+
+  const compiler = webpack(config)
+
+  const server = new WebpackDevServer(compiler, {
     contentBase: process.cwd(),
     hot: true,
     historyApiFallback: true,
     publicPath: '/',
-    clientLogLevel: 'none',
-  });
+    clientLogLevel: 'none'
+  })
 
-  server.listen(4567, "localhost", (err) => {
+  server.listen(4567, 'localhost', (err) => {
     if (err) {
-      console.error(err.stack || err);
+      console.error(err.stack || err)
       if (err.details) {
-        console.error(err.details);
+        console.error(err.details)
       }
-      return;
+      return
     }
 
     spawn(`npx electron .`, {
       shell: true,
       stdio: 'inherit',
       stderr: 'inherit'
-    });
-  });
+    })
+  })
 }
 
-module.exports = start;
+module.exports = start

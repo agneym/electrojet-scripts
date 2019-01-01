@@ -1,40 +1,45 @@
-const webpack = require("webpack");
-const spawn = require("cross-spawn");
+const webpack = require('webpack')
+const spawn = require('cross-spawn')
 
-const getWebpackConfig = require("../extensions/getWebpackConfig");
+const getWebpackConfig = require('../extensions/getWebpackConfig')
 
-async function build() {
-  const env = "PROD";
-  
-  const config = getWebpackConfig(env);
-  const compiler = webpack(config);
+/**
+ * Triggered when start command is run from the CLI
+ * Runs webpack dev server and sets electron on watch
+ * @param {Object} cli
+ */
+async function build (cli) {
+  const env = 'PROD'
+
+  const config = getWebpackConfig(env)
+  const compiler = webpack(config)
 
   compiler.run((err, stats) => {
     if (err) {
-      console.error(err.stack || err);
+      console.error(err.stack || err)
       if (err.details) {
-        console.error(err.details);
+        console.error(err.details)
       }
-      return;
+      return
     }
 
-    const info = stats.toJson();
+    const info = stats.toJson()
 
     if (stats.hasErrors()) {
-      console.error(info.errors);
-      return;
+      console.error(info.errors)
+      return
     }
 
     if (stats.hasWarnings()) {
-      console.warn(info.warnings);
+      console.warn(info.warnings)
     }
 
     spawn(`npm run build`, {
       shell: true,
       stdio: 'inherit',
       stderr: 'inherit'
-    });
-  });
+    })
+  })
 }
 
-module.exports = build;
+module.exports = build
