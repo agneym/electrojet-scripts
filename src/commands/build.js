@@ -39,7 +39,8 @@ async function build (cli) {
     const spinner = ora("Starting to generate build").start()
 
     try {
-      const config = getPackagerConfig()
+      const config = await getPackagerConfig()
+
       const appPaths = await packager(config)
       spinner.succeed(`Generated builds successfully at
         ${appPaths.join('\n')}

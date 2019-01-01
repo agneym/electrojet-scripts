@@ -16,7 +16,7 @@ async function getPackagerConfig() {
   if(result.isEmpty) {
     return defaultConfig
   } else {
-    return Object.assign({}, defaultConfig, result.config.buildOptions || {})
+    return Object.assign(defaultConfig, result.config.buildOptions || {})
   }
 }
 
