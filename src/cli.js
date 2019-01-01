@@ -26,10 +26,10 @@ function run (argv) {
   if(validateCommand(cli, command)) {
     switch(command) {
       case 'start':
-        start();
+        start(cli);
         break;
       case 'build':
-        build();
+        build(cli);
         break;
     }
   }
