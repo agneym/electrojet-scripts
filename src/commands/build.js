@@ -15,7 +15,7 @@ async function build (cli) {
   const config = getWebpackConfig(env)
   const compiler = webpack(config)
 
-  compiler.run((err, stats) => {
+  compiler.run(async (err, stats) => {
     if (err) {
       console.error(err.stack || err)
       if (err.details) {
