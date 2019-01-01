@@ -2,7 +2,7 @@ const webpack = require('webpack')
 const WebpackDevServer = require('webpack-dev-server')
 const spawn = require('cross-spawn')
 
-const getWebpackConfig = require('../extensions/getWebpackConfig')
+const {getConfig, getWebpackConfig} = require('../extensions/getConfig')
 
 /**
  * Triggered when start command is run from the CLI
@@ -12,9 +12,10 @@ const getWebpackConfig = require('../extensions/getWebpackConfig')
 async function start () {
   const env = 'dev'
 
-  const config = getWebpackConfig(env)
+  const config = await getConfig()
 
-  const compiler = webpack(config)
+  const webpackConfig = getWebpackConfig(env, config.plugins)
+  const compiler = webpack(webpackConfig)
 
   const server = new WebpackDevServer(compiler, {
     contentBase: process.cwd(),

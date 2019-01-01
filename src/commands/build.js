@@ -2,8 +2,7 @@ const webpack = require('webpack')
 const packager = require('electron-packager')
 const ora = require("ora")
 
-const getWebpackConfig = require('../extensions/getWebpackConfig')
-const getPackagerConfig = require('../extensions/getPackagerConfig')
+const { getPackagerConfig, getConfig, getWebpackConfig } = require('../extensions/getConfig')
 
 /**
  * Triggered when start command is run from the CLI
@@ -13,8 +12,10 @@ const getPackagerConfig = require('../extensions/getPackagerConfig')
 async function build (cli) {
   const env = 'prod'
 
-  const config = getWebpackConfig(env)
-  const compiler = webpack(config)
+  const config = await getConfig()
+  
+  const webpackConfig = getWebpackConfig(env, config.plugins)
+  const compiler = webpack(webpackConfig)
 
   compiler.run(async (err, stats) => {
     if (err) {
@@ -39,7 +40,7 @@ async function build (cli) {
     const spinner = ora("Starting to generate build").start()
 
     try {
-      const config = await getPackagerConfig()
+      const config = await getPackagerConfig(config.buildOptions)
 
       const appPaths = await packager(config)
       spinner.succeed(`Generated builds successfully at
