@@ -14,7 +14,7 @@ async function start (cli) {
   const env = 'dev'
   const userPort = cli.flags.port
 
-  const port = getPort(userPort)
+  const port = await getPort(userPort)
 
   const config = await getConfig()
 

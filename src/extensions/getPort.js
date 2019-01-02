@@ -1,21 +1,21 @@
 const detect = require("detect-port")
-const Confirm = require('prompt-confirm');
+const { prompt } = require("enquirer")
 
 async function getPort(userPort) {
   const _port = await detect(userPort)
   if(_port === userPort) {
     return userPort;
   } else {
-    const prompt = new Confirm(`
-      Seems like ${userPort} is being used by another application.
-      Would you like to try ${_port}?
-    `);
-    const answer = await prompt.run();
-    if(!answer) {
-      console.warn("Consider rerunning the script with --port flag");
+    const answer = await prompt({
+      type: 'confirm',
+      name: 'port',
+      message: `Seems like ${userPort} is being used by another application. \nWould you like to try ${_port}?`, 
+    });
+    if (!answer.port) {
+      console.warn("\nConsider rerunning the script with --port flag");
       process.exit();
     } else {
-      return _port;
+      return Promise.resolve(_port);
     }
   }
 }
