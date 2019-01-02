@@ -14,7 +14,8 @@ module.exports = {
         return result.config;
       }
     } catch(err) {
-      console.error("Could not read config file.");
+      console.error("Could not read config file. Please check the following error message for help");
+      console.error(err);
       process.exit();
     }
   },

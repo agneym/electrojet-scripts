@@ -13,6 +13,11 @@
     "snapupdate": "jest --updateSnapshot",
     "coverage": "jest --coverage"
   },
+  "keywords": [
+    "electrojet",
+    "electron",
+    "cli"
+  ],
   "files": [
     "bin",
     "src"
