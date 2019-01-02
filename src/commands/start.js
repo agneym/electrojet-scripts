@@ -3,6 +3,7 @@ const WebpackDevServer = require('webpack-dev-server')
 const spawn = require('cross-spawn')
 
 const {getConfig, getWebpackConfig} = require('../extensions/getConfig')
+const getPort = require('../extensions/getPort')
 
 /**
  * Triggered when start command is run from the CLI
@@ -12,6 +13,8 @@ const {getConfig, getWebpackConfig} = require('../extensions/getConfig')
 async function start (cli) {
   const env = 'dev'
   const userPort = cli.flags.port
+
+  const port = getPort(userPort)
 
   const config = await getConfig()
 
@@ -35,7 +38,7 @@ async function start (cli) {
       return
     }
 
-    spawn(`npx electron . --port=${userPort}`, {
+    spawn(`npx electron . --port=${port}`, {
       shell: true,
       stdio: 'inherit',
       stderr: 'inherit'
